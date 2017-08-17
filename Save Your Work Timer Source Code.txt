@@ -1,0 +1,134 @@
+using System;
+using System.Windows.Forms;
+
+namespace SaveYourWorkTimer
+{
+    public partial class Form1 : Form
+    {
+        public Form1()
+        {
+            InitializeComponent();
+        }
+
+        int hours, mins, sec = 0;
+        int ms = 10;
+
+        private void btnStart_Click(object sender, EventArgs e)
+        {
+            timer1.Start();
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            sec = 0;
+            mins = 0;
+            hours = 0;
+
+            lblSec.Text = "0";
+            lblMins.Text = "0";
+            lblHrs.Text = "0";
+        }
+
+        private void rdCustomTime_CheckedChanged(object sender, EventArgs e)
+        {
+            txtHrs.Enabled = true;
+            txtMins.Enabled = true;
+            txtSec.Enabled = true;
+        }
+
+        private void rd15Mins_CheckedChanged(object sender, EventArgs e)
+        {
+            txtHrs.Enabled = false;
+            txtMins.Enabled = false;
+            txtSec.Enabled = false;
+        }
+
+        private void rd30Mins_CheckedChanged(object sender, EventArgs e)
+        {
+            txtHrs.Enabled = false;
+            txtMins.Enabled = false;
+            txtSec.Enabled = false;
+        }
+
+        private void rd45Mins_CheckedChanged(object sender, EventArgs e)
+        {
+            txtHrs.Enabled = false;
+            txtMins.Enabled = false;
+            txtSec.Enabled = false;
+        }
+
+        private void btnStop_Click(object sender, EventArgs e)
+        {
+            timer1.Stop();
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            lblHrs.Text = hours.ToString();
+            lblMins.Text = mins.ToString();
+            lblSec.Text = sec.ToString();
+            ms++;
+
+            if (ms > 10)
+            {
+                sec++;
+            }
+
+            if (sec == 60)
+            {
+                mins++;
+                sec = 0;
+            }
+
+            if (mins == 60)
+            {
+                hours++;
+                mins = 0;
+                sec = 0;
+            }
+            
+            if (rd15Mins.Checked == true && lblMins.Text == "15")
+            {
+                timer1.Stop();
+                sec = 0;
+                mins = 0;
+                hours = 0;
+                MessageBox.Show(new Form { TopMost = true }, "Save your work!");
+                timer1.Start();
+            }
+
+            if (rd30Mins.Checked == true && lblMins.Text == "30")
+            {
+                timer1.Stop();
+                sec = 0;
+                mins = 0;
+                hours = 0;
+                MessageBox.Show(new Form { TopMost = true }, "Save your work!");
+                timer1.Start();
+            }
+
+            if (rd45Mins.Checked == true && lblMins.Text == "45")
+            {
+                timer1.Stop();
+                sec = 0;
+                mins = 0;
+                hours = 0;
+                MessageBox.Show(new Form { TopMost = true }, "Save your work!");
+                timer1.Start();
+            }
+
+            if (rdCustomTime.Checked == true)
+            {
+                if (lblHrs.Text == txtHrs.Text & lblMins.Text == txtMins.Text & lblSec.Text == txtSec.Text)
+                {
+                    timer1.Stop();
+                    sec = 0;
+                    mins = 0;
+                    hours = 0;
+                    MessageBox.Show(new Form { TopMost = true }, "Save your work!");
+                    timer1.Start();
+                }
+            }
+        }
+    }
+}
